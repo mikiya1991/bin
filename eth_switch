@@ -1,0 +1,16 @@
+#!/bin/sh
+set -x
+ifconfig eth1 down
+ifconfig eth0 down
+route del default 
+echo $1 $2
+if [ $# -ge 1 ]; then
+	if [ $1 == 0 ]; then
+		ifconfig eth0 up
+		route add default gw 10.0.0.1 dev eth0
+	else
+		ifconfig eth1 up
+		ifconfig eth0 up
+		route add default dev eth1
+	fi
+fi
