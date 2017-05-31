@@ -1,6 +1,7 @@
 #! /bin/sh
 IPADDR=10.0.2.90
 ETHADDR=00:e0:4c:23:45:67
+#10.0.1.10/10.0.1.12
 NFS_SERVER_IP=10.0.2.110
 NFS_SERVER=${NFS_SERVER_IP}:/home/mikiya/nfs
 
