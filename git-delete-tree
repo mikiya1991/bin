@@ -1,0 +1,17 @@
+#! /bin/sh
+if [ $# -lt 1 ]; then
+    echo "error: no file specified"
+    exit 1
+fi
+
+path='.'
+if [ $# -gt 1 ]; then
+    path="$2"
+fi
+
+cmd="git filter-branch -f --tree-filter"
+shell_script=" \"find ${path} -name $1 -type f -delete\""
+extra_cmd=" --tag-name-filter cat -- --all"
+
+eval ${cmd}${shell_script}${extra_cmd}
+git gc  --prune=now
