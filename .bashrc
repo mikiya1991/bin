@@ -9,7 +9,7 @@ EDITOR=gvim
 BOARD_IP=10.0.2.111
 
 function rftp() {
-    if [ $# -gt 2 ]
+    if [ $# -ge 2 ]
     then
         echo -e "binary\n put $1" | tftp $2
     fi
@@ -19,6 +19,5 @@ function rftp() {
     else
         echo -e "binary\n put linux.bin" | tftp ${BOARD_IP}
     fi
-
 }
 

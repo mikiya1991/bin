@@ -1,0 +1,30 @@
+#! /bin/sh
+install() {
+    p=`pwd`
+    ctags -R $p
+    find $p -name "*.[hc]" > cscope.files
+    cscope -bqk
+    rm -f cscope.files
+}
+
+clean() {
+    find "`pwd`" -name "cscope.*" | xargs rm -rf
+    rm tags
+}
+
+if ! cscope -V > /dev/null
+then
+    echo "no cscope installed!"
+    exit 1
+fi
+
+if [ $# -eq 0 ]
+then
+    install
+elif [ $1 == "install" ]
+then
+    install
+elif [ $1 == "clean" ]
+then
+    clean
+fi

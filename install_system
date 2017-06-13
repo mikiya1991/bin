@@ -1,27 +1,41 @@
 #!/bin/sh
-apt-get update && apt-get upgrade -y
 
-apt-get install silversearcher-ag -y
-apt-get install ctags -y
-apt-get install cscope -y
-
-# install subl
 SUBL_NAME=sublime-text_build-3126_amd64.deb
-if ! subl -v > /dev/null
-then
-    wget https://download.sublimetext.com/${SUBL_NAME} \
-    && dpkg -i ${SUBL_NAME}
-    if [ $? -eq 0 ]
-    then
-    :
-    else
-        echo "can not install sublimetext"
-        exit 1
-    fi
-fi
+system_update() {
+    apt-get update && apt-get upgrade -y
+}
+install_cscope_ag() {
 
-if [ ! -d sublime-text-imfix ]
-then
-    git clone https://github.com/lyfeyaj/sublime-text-imfix.git
-    cd sublime-text-imfix && ./sublime-imfix
-fi
+    apt-get install silversearcher-ag -y
+    apt-get install ctags -y
+    apt-get install cscope -y
+
+    echo -e "Bundle \"vim-scripts/autoload_cscope.vim\" \n\
+Bundle \"antiagainst/cscope-macros.vim\" " > ~/.vimrc.local
+    vim +PluginInstall +qa
+}
+
+install_subl() {
+    if ! subl -v > /dev/null
+    then
+        wget https://download.sublimetext.com/${SUBL_NAME} \
+        && dpkg -i ${SUBL_NAME}
+        if [ $? -eq 0 ]
+        then
+        :
+        else
+            echo "can not install sublimetext"
+            exit 1
+        fi
+    fi
+
+    if [ ! -d sublime-text-imfix ]
+    then
+        git clone https://github.com/lyfeyaj/sublime-text-imfix.git
+        cd sublime-text-imfix && ./sublime-imfix
+    fi
+}
+
+system_update
+install_cscope_ag
+intstall_subl
