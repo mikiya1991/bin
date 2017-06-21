@@ -11,7 +11,13 @@ install_cscope_ag() {
     apt-get install cscope -y
 
     echo -e "Bundle \"vim-scripts/autoload_cscope.vim\" \n\
-Bundle \"antiagainst/cscope-macros.vim\" " > ~/.vimrc.local
+Bundle \"antiagainst/cscope-macros.vim\"" > ~/.vimrc.local
+    echo -e "set shiftwidth=8\nset tabstop=8\n\
+set softtabstop=8\nset noexpandtab\nset wrap" >> ~/.vimrc.local
+    if ! cat ~/.vimrc | grep "source ~/.vimrc.local"
+    then
+        echo "source ~/.vimrc.local" >> ~/.vimrc
+    fi
     vim +PluginInstall +qa
 }
 
@@ -36,6 +42,25 @@ install_subl() {
     fi
 }
 
+install_32bits_packages() {
+    local arch_type=$(uname -m)
+    if [[ ${arch_type} == 'x86_64' ]]
+    then
+        dpkg --add-architecture i386
+        apt-get update
+        apt-get install gcc-multilib lib32z1-dev lib32ncurses5-dev -y
+    fi
+}
+
+prepare_ubuntu() {
+    echo -e "reconfigure dash==>select no"
+    dpkg-reconfigure dash
+    apt-get install lib32ncurses5-dev autoconf automake cmake libtool \
+    gettext texinfo gawk mtd-utils flex bison -y
+}
+
 system_update
 install_cscope_ag
-intstall_subl
+install_subl
+prepare_ubuntu
+install_32bits_packages

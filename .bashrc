@@ -11,13 +11,13 @@ BOARD_IP=10.0.2.111
 function rftp() {
     if [ $# -ge 2 ]
     then
-        echo -e "binary\n put $1" | tftp $2
+        echo -e "binary\n put $1\n exit" | tftp $2
     fi
     if [ $# -eq 1 ]
     then
-        echo -e "binary\n put $1" | tftp ${BOARD_IP}
+        echo -e "binary\n put $1\n exit" | tftp ${BOARD_IP}
     else
-        echo -e "binary\n put linux.bin" | tftp ${BOARD_IP}
+        echo -e "binary\n put linux.bin\n exit" | tftp ${BOARD_IP}
     fi
 }
 
