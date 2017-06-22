@@ -16,6 +16,7 @@ Bundle \"antiagainst/cscope-macros.vim\"" > ~/.vimrc.local
 set softtabstop=8\nset noexpandtab\nset wrap" >> ~/.vimrc.local
     if ! cat ~/.vimrc | grep "source ~/.vimrc.local"
     then
+        echo "can not found vimrc.local in vimrc"
         echo "source ~/.vimrc.local" >> ~/.vimrc
     fi
     vim +PluginInstall +qa
@@ -59,8 +60,25 @@ prepare_ubuntu() {
     gettext texinfo gawk mtd-utils flex bison -y
 }
 
+echo $# $1 $2
+if [ $# -eq 0 ]
+then
 system_update
 install_cscope_ag
 install_subl
 prepare_ubuntu
 install_32bits_packages
+exit 0
+fi
+
+if [ $1 == "sdk" ]
+then
+prepare_ubuntu
+install_32bits_packages
+elif [ $1 == "cscope" ]
+then
+install_cscope_ag
+elif [ $1 == "subl" ]
+then
+install_subl
+fi
