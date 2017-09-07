@@ -1,5 +1,5 @@
 alias vi="gvim"
-export PATH=$PATH:~/bin
+export PATH="$PATH:/home/mikiya/bin:/home/mikiya/scitools/bin/linux64"
 export TERM=xterm
 export TERMINFO=/lib/terminfo
 alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
@@ -21,3 +21,4 @@ function rftp() {
     fi
 }
 
+alias rm="rm -v"
