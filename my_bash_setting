@@ -21,3 +21,5 @@ function rftp() {
 
 alias rm="rm -v"
 alias t="tmux"
+alias agc="ag --cc -a"
+alias agf="ag -g"
