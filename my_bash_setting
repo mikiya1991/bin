@@ -1,9 +1,7 @@
-alias vi="gvim"
-export PATH="$PATH:/home/mikiya/bin:/home/mikiya/scitools/bin/linux64"
+LOCAL_PATH="/home/mikiya/bin:/home/mikiya/scitools/bin/linux64"
+export PATH="$LOCAL_PATH:$PATH"
 export TERM=xterm
 export TERMINFO=/lib/terminfo
-alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
-alias understand="sh ~/bin/scitools/bin/linux64/understand"
 BOARD_IP=10.0.2.111
 
 function rftp() {
@@ -19,6 +17,8 @@ function rftp() {
     fi
 }
 
+alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
+alias understand="sh ~/bin/scitools/bin/linux64/understand"
 alias rm="rm -v"
 alias t="tmux"
 alias agc="ag --cc -a"
