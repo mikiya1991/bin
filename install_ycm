@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "this script only for ubuntu16.04, refto https://github.com/Valloric/YouCompleteMe/Readme.md"
+
+apt update
+echo "1> install dependencies"
+apt install cmake build-essential python3-dev
+echo "2> make YouCompleteMe"
+cd \
+~/.vim/bundle/YouCompleteMe && python3 install --clang-completer
+
+
+echo "3> install bear"
+apt install bear
+echo "c family language need complie flags to parse code, you also need to generate it. ref to readme.md"
+
+echo "for cmake system use -DCMAKE_EXPORT_COMPILE_COMMANDS=ON to export compile_commands.json"
+echo "for make system use bear <build command> to gen compile_commands.json"
+echo "clean you project; before using bear"
+
+
+echo "Press <Tab> to complete, tab again to cycle. <Ctrl + Space> to toggle complete suggestion"
