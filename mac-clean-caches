@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CACHES_LOCATIONS=(
+"/Library/Caches"
+"~/Library/Caches"
+)
+
+for loc in "${CACHES_LOCATIONS[@]}"
+do
+	find . -depth +1 -delete 
+done
