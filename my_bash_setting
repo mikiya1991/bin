@@ -1,4 +1,4 @@
-LOCAL_PATH="/home/mikiya/bin:/home/mikiya/scitools/bin/linux64"
+LOCAL_PATH="${HOME}/bin:${HOME}/scitools/bin/linux64:${HOME}/Library/Python/3.7/bin"
 export PATH="$LOCAL_PATH:$PATH"
 export TERM=xterm
 export TERMINFO=/lib/terminfo
