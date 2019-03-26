@@ -3,6 +3,7 @@ export PATH="$LOCAL_PATH:$PATH"
 export TERM=xterm
 export TERMINFO=/lib/terminfo
 BOARD_IP=10.0.2.111
+export EDITOR="/usr/bin/vim"
 
 function rftp() {
     if [ $# -ge 2 ]
