@@ -27,5 +27,9 @@ let g:airline#extensions#tabline#enabled=1
 " let g:airline#extensions#tabline#left_sep=' '
 " let g:airline#extensions#tabline#left_alt_sep='<'
 
+" fix neocomplete error on mac
+" brew uninstall macvim, brew install macvim --with-lua
+" brew install vim --with-lua --with-override-system-vim
+
 
 noremap <leader><leader>f :Ack -i "\b<C-R><C-W>\b"<CR>
