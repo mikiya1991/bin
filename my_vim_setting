@@ -5,25 +5,30 @@ set shiftwidth=8
 set tabstop=8
 set softtabstop=8
 set noexpandtab
-set wrap
+set nowrap
 
 if has('gui_running')
  set guioptions-=T  " no toolbar
- colorscheme solarized
+" colorscheme Tomorrow-Night
+   colorscheme evening1
  "set lines=60 columns=108 linespace=0
  if has('gui_win32')
    set guifont=DejaVu_Sans_Mono:h11:cANSI
  elseif has('gui_macvim')
    set guifont=Menlo:h13
  else
-   set guifont=DejaVu\ Sans\ Mono\ 11
+   set guifont=DejaVu\ Sans\ Mono\ 10
  endif
 endif
 
 set colorcolumn=80
 
 let g:airline_theme='molokai'
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#tabline#fnamemod = ':p:.:t'
+" let g:airline#extensions#tabline#fnamecollapse = 1
 " let g:airline#extensions#tabline#left_sep=' '
 " let g:airline#extensions#tabline#left_alt_sep='<'
 
@@ -33,6 +38,7 @@ let g:airline#extensions#tabline#enabled=1
 
 
 noremap <leader><leader>f :Ack -i "\b<C-R><C-W>\b"<CR>
+noremap <leader>u :CtrlPFunky<cr>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 nnoremap <leader>l :ls<CR>
@@ -46,3 +52,5 @@ nnoremap <leader>7 :7b<CR>
 nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :10b<CR>
+nnoremap H :bp<CR>
+nnoremap L :bn<CR>

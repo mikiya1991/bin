@@ -19,9 +19,11 @@ function rftp() {
 }
 
 alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
-alias understand="sh ~/bin/scitools/bin/linux64/understand"
+alias understand="sh ~/scitools/bin/linux64/understand"
 alias rm="rm -v"
 alias t="tmux -2"
 alias agc="ag --cc -a"
 alias agf="ag -g"
 alias vi="gvim"
+alias python="python3"
+alias xclip="xclip -sel clip"
