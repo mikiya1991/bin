@@ -1,9 +1,8 @@
-LOCAL_PATH="${HOME}/bin:${HOME}/scitools/bin/linux64:${HOME}/Library/Python/3.7/bin"
-export PATH="$LOCAL_PATH:$PATH"
-export TERM=xterm
-export TERMINFO=/lib/terminfo
+#LOCAL_PATH="${HOME}/bin:/usr/local/bin"
+#LOCAL_PATH="${HOME}/bin"
+#export TERM=xterm
+#export TERMINFO=/lib/terminfo
 BOARD_IP=10.0.2.111
-export EDITOR="/usr/bin/vim"
 
 function rftp() {
     if [ $# -ge 2 ]
@@ -19,11 +18,23 @@ function rftp() {
 }
 
 alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
-alias understand="sh ~/scitools/bin/linux64/understand"
+#alias understand="sh ~/scitools/bin/linux64/understand"
 alias rm="rm -v"
-alias t="tmux -2"
 alias agc="ag --cc -a"
 alias agf="ag -g"
-alias vi="gvim"
-alias python="python3"
+alias vi="mvim"
 alias xclip="xclip -sel clip"
+
+#alias ssht="ssh -AfNn -L localhost:51432:10.0.2.110:22 rspc"
+#alias sshxt="ssh -XAfNn -L localhost:51432:10.0.2.110:22 rspc"
+#alias sshw="ssh -A tunnel"
+#alias sshxw="ssh -XA tunnel"
+#alias sshs="ssh -TgnfND 17677 tunnel"
+
+#alias sshnnt="ssh -AfNn -L localhost:51433:10.0.1.17:22 rspc"
+#alias sshnn="ssh -A -p 51433 tunnel_nn"
+#alias sshnns="ssh -TgnfND 17677 tunnel_nn"
+
+
+alias sshs="ssh -TgnfND 17677 LYJ2mikiya"
+alias xopen=open_command
