@@ -1,6 +1,11 @@
 
 set nocompatible
-call plug#begin('~/.vim/plugged')
+
+if has('nvim')
+  call plug#begin(stdpath('data').'/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -18,19 +23,21 @@ Plug 'junegunn/fzf.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'Yggdroot/indentLine'
 Plug 'sheerun/vim-polyglot'
+Plug 'mileszs/ack.vim'
 
 if has('nvim')
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'neoclide/coc.nvim', {'branch':'release' }
 else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
   Plug 'morhetz/gruvbox'
 endif
 
 call plug#end()
 
-set number
-set wrap
-syntax on
+
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -47,40 +54,80 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-if has('nvim')
-colorscheme tokyonight
-else
-colorscheme gruvbox
-endif
 
 let g:rainbow_active = 1
 let g:NERDCreateDefaultMappings = 1
-"if executable('ag')
-	"let g:ackprg = 'ag --vimgrep'
-"endif
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
 let g:airline#extensions#tabline#enabled = 1
 let mapleader = ","
 
-"if has('nvim')
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-  "Plug 'Shougo/deoplete.nvim'
-  "Plug 'roxma/nvim-yarp'
-  "Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
+
+syntax on
+set number
+set wrap
+
+set autoindent                  " Indent at the same level of the previous line
+set shiftwidth=4                " Use indents of 4 spaces
+set expandtab                   " Tabs are spaces, not tabs
+set tabstop=4                   " An indentation every four columns
+set softtabstop=4               " Let backspace delete indent
+set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
+
+set backspace=indent,eol,start
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set incsearch                   " Find as you type search
+set hlsearch                    " Highlight search terms
+set ignorecase                  " Case insensitive search
+set smartcase                   " Case sensitive when uc present
+set cursorline                  " Highlight current line
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! <SID>StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let l:save = winsaveview()
+    " do the business, with out add to command history:
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+
+autocmd FileType c,cpp,python,lua autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 
 
 noremap <silent> <C-e> :NERDTreeToggle<CR>
+noremap <leader>tt :TagbarToggle<CR>
 noremap <silent> H :bp<CR>
 noremap <silent> L :bn<CR>
 noremap <silent> <C-H> <C-W>h
 noremap <silent> <C-L> <C-W>l
 noremap <silent> <C-J> <C-W>j
 noremap <silent> <C-K> <C-W>k
-noremap <leader>tt :TagbarToggle<CR>
-noremap <leader>]  :cn<CR>
-noremap <leader>[  :cp<CR>
+noremap e]  :cn<CR>
+noremap e[  :cp<CR>
 noremap <C-P> 	:Files<CR>
 noremap <C-G> 	:BTags<CR>
+
+if has('nvim')
+  set signcolumn=number
+  colorscheme tokyonight
+
+  " nvim-coc completion
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+  " GoTo code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+else
+  colorscheme gruvbox
+  let g:deoplete#enable_at_startup = 1
+endif
+
+noremap <leader>ff :Ack <cword><CR>
 
