@@ -2,22 +2,21 @@
 #LOCAL_PATH="${HOME}/bin"
 #export TERM=xterm
 #export TERMINFO=/lib/terminfo
-BOARD_IP=10.0.2.111
+#BOARD_IP=10.0.2.111
+#function rftp() {
+#    if [ $# -ge 2 ]
+#    then
+#        echo -e "binary\n put $1\n quit\nquit\n" | tftp $2
+#    fi
+#    if [ $# -eq 1 ]
+#    then
+#        echo -e "binary\n put $1\n quit\n" | tftp ${BOARD_IP}
+#    else
+#        echo -e "binary\n put linux.bin\n quit\n" | tftp ${BOARD_IP}
+#    fi
+#}
 
-function rftp() {
-    if [ $# -ge 2 ]
-    then
-        echo -e "binary\n put $1\n quit\nquit\n" | tftp $2
-    fi
-    if [ $# -eq 1 ]
-    then
-        echo -e "binary\n put $1\n quit\n" | tftp ${BOARD_IP}
-    else
-        echo -e "binary\n put linux.bin\n quit\n" | tftp ${BOARD_IP}
-    fi
-}
-
-alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
+#alias rrepo="repo init -u ssh://anakin_wang@pcbugit2.realsil.com.cn:29418/rlxlinux/manifest.git"
 #alias understand="sh ~/scitools/bin/linux64/understand"
 alias rm="rm -v"
 alias agc="ag --cc -a"
